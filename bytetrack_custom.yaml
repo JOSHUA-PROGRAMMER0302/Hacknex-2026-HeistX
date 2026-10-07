@@ -1,0 +1,16 @@
+# Custom ByteTrack config for Sentinel-Edge
+# Tuned for stable long-term person tracking with minimal ID switches.
+
+tracker_type: bytetrack
+
+# Lower thresholds → more detections survive into the association step
+track_high_thresh: 0.25       # default 0.5  — first-pass detection confidence
+track_low_thresh: 0.05        # default 0.1  — second-pass (low-confidence rescue)
+new_track_thresh: 0.35        # default 0.6  — confidence to birth a new track
+
+# Keep lost tracks alive much longer before deleting
+track_buffer: 120             # default 30   — frames to keep a lost track (5s @ 24fps)
+
+# IoU matching
+match_thresh: 0.82            # default 0.8  — IoU threshold for association
+fuse_score: true

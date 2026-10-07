@@ -1,0 +1,26 @@
+# Custom BoT-SORT config for Sentinel-Edge
+# BoT-SORT adds camera-motion compensation (CMC) and ReID features
+# for drastically better ID persistence vs ByteTrack.
+
+tracker_type: botsort
+
+# Detection confidence gates
+track_high_thresh: 0.25       # first-pass association threshold
+track_low_thresh: 0.05        # second-pass rescue for low-confidence detections
+new_track_thresh: 0.30        # confidence floor to birth a new track
+
+# Keep lost tracks alive through prolonged box occlusion.
+track_buffer: 120
+
+# Association
+match_thresh: 0.80
+fuse_score: true
+
+# BoT-SORT specific: camera motion compensation
+gmc_method: sparseOptFlow     # optical-flow based camera-motion compensation
+proximity_thresh: 0.5
+appearance_thresh: 0.25
+
+# ReID model (uses built-in feature extractor)
+with_reid: false              # set true if you add a ReID model weight
+model: auto                   # required by current Ultralytics even when ReID is disabled
